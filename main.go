@@ -29,7 +29,7 @@ func main() {
 	model := client.GenerativeModel("gemini-pro")
 
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Printf("Choice target language for translate (input name language in english) \n")
+	fmt.Printf("Choose target language to translate (input name language in english) \n")
 
 	t, err := reader.ReadString('\n')
 
@@ -52,6 +52,7 @@ func main() {
 		genai.Text(fmt.Sprintf("Translate this pharase in this language %s ", t)),
 		genai.Text(p),
 	}
+	
 	res, err := model.GenerateContent(ctx, prompt...)
 	if err != nil {
 		fmt.Println(res)
