@@ -8,15 +8,15 @@ import (
 	"strings"
 
 	"github.com/google/generative-ai-go/genai"
-	"google.golang.org/api/option"
 	"github.com/joho/godotenv"
+	"google.golang.org/api/option"
 )
 
 func main() {
 	if err := godotenv.Load(); err != nil {
-        fmt.Printf("Erro ao carregar o arquivo .env: %s", err)
+		fmt.Printf("Erro ao carregar o arquivo .env: %s", err)
 		return
-    }
+	}
 	apikey := os.Getenv("GEMINI_API_KEY")
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, option.WithAPIKey(apikey))
@@ -48,7 +48,7 @@ func main() {
 	t = strings.TrimSpace(t)
 	p = strings.TrimSpace(p)
 
-	prompt := []genai.Part {
+	prompt := []genai.Part{
 		genai.Text(fmt.Sprintf("Translate this pharase in this language %s ", t)),
 		genai.Text(p),
 	}
@@ -58,9 +58,8 @@ func main() {
 		return
 	}
 
-
-for i, k := range res.Candidates {
-	fmt.Println(k.Content.Parts[i])
-}
+	for i, k := range res.Candidates {
+		fmt.Println(k.Content.Parts[i])
+	}
 
 }
